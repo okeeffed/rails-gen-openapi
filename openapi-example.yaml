@@ -21,20 +21,9 @@ paths:
                             properties:
                                 id:
                                     type: string
-                                    format: uuid
-                                address:
-                                    # default Content-Type for objects is `application/json`
-                                    type: object
-                                    properties: {}
-                                profileImage:
-                                    # default Content-Type for string/binary is `application/octet-stream`
-                                    type: string
-                                    format: binary
-                                children:
-                                    # default Content-Type for arrays is based on the `inner` type (text/plain here)
-                                    type: array
-                                    items:
-                                        type: string
-            responses:
-                "201":
-                    description: Created
+                                    format: string
+    /users/{id}:
+        get:
+            summary: Gets a user.
+        patch:
+            summary: Gets a user.

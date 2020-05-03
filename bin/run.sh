@@ -1,3 +1,3 @@
 #!/bin/bash
 # Re-run main on file changes
-./main.rb -v -f routes.txt
+./main.rb -f routes.txt

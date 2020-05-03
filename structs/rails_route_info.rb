@@ -1,9 +1,7 @@
-require "dry-types"
 require "dry-struct"
+require_relative "../types/index"
 
-module Types
-  include Dry.Types()
-
+module Structs
   class RouteInfo < Dry::Struct
     attribute :verb, Types::Strict::String
     attribute :uri_pattern, Types::Strict::String
