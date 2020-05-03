@@ -1,7 +1,9 @@
 #!/usr/bin/env ruby
 require "slop"
 require "dry/monads"
-require_relative "util/file"
+require_relative "util/file_helpers"
+
+include Dry::Monads[:result]
 
 verbose = false
 
@@ -17,9 +19,14 @@ opts = Slop.parse { |o|
   end
 }
 
-puts opts.to_hash #=> { host: "192.168.0.1", login: "alice", port: 80, verbose: true, quiet: false, check_ssl_certificate: true }
+handle_failure = lambda do |failure|
+  puts failure
+end
+
+handle_success = lambda do |success|
+  puts success
+end
 
 # Read file - this looks synchronous
-file_data = FP::RoutesFile.call(opts.to_hash[:file])
-result = file_data.value!
-puts result
+file_data = Util::FileHelpers.call(opts.to_hash[:file])
+file_data.either(handle_failure, handle_success)
