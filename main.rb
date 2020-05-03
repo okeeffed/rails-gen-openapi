@@ -16,7 +16,7 @@ opts = Slop.parse { |o|
   end
 }
 
-# ! This hack sucks - what is better? hash.transform_keys(&:to_s) didn't help me on 2.6.6.
+# ! This hack sucks - what is better? hash.transform_keys(&:to_s) didn't help me on Ruby 2.6.6.
 class ::Hash
   # via https://stackoverflow.com/a/25835016/2257038
   def stringify_keys
@@ -35,11 +35,13 @@ end
 
 # Define handlers for Either Monad
 handle_failure = lambda do |failure|
+  # just write the failure to stdout for now
   puts failure
   exit 1
 end
 
 handle_success = lambda do |success|
+  # ! I really detest this hack. There needs to be a better way.
   res = success.to_hash.stringify_keys
 
   # Write OpenAPI output to YAML file
@@ -49,9 +51,9 @@ handle_success = lambda do |success|
 end
 
 # Main
-# ! Read file - this looks synchronous. How do you write file streams in Ruby instead of creating large memory buffers?
+# ! This looks synchronous. How do you write file streams in Ruby instead of creating large memory buffers?
 file_data = Util::FileHelpers.call(opts.to_hash[:file]).value_or(handle_failure)
 yaml_format = Util::OpenAPIHelpers.call(file_data)
 
-# Fork either handlers based on success or failure
+# Fold either handlers based on success or failure
 yaml_format.either(handle_success, handle_failure)

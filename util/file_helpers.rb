@@ -51,6 +51,8 @@ module Util
         route_info_arr = stripped_file_data.map { |line|
           route_info = line.split(/\s+/)
           # ! Is the a way to make this easier to read? Array destructuring?
+          # I tried to splat with **route_info but alas, no tomato. Maybe the
+          # named params don't marry up to the constructor?
           Structs::RouteInfo.new(verb: route_info[0], uri_pattern: route_info[1], controller_action: route_info[2])
         }
         Success(route_info_arr)

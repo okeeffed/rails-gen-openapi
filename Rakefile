@@ -1,5 +1,5 @@
 task default: %w[run]
 
 task :run do
-  puts "Waiting for command"
+  puts "Didn't even use this..."
 end

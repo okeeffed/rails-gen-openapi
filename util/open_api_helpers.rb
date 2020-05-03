@@ -32,6 +32,7 @@ module Util
 
         Success(res)
       rescue => e
+        # ! Maybe I should be passing the errors as an object with message + stack trace
         puts e
         Failure("Could not convert params from :param to {param} format")
       end
@@ -55,6 +56,7 @@ module Util
       def write_paths_hash(file_data)
         paths_hash = {}
         file_data.each do |info|
+          # Simplify the GET part - assume all other REST verbs require a request body
           if info.verb == "GET"
             paths_hash.deep_merge({info.uri_pattern => Hash[info.verb.to_s.downcase, get_verb(info)]})
           else
