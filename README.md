@@ -171,13 +171,17 @@ This part was the delightful part.
 
 Once imported, you can `Generate Collection` on Postman and it would bring in all 900 requests.
 
-[Add in photo of requests here]
+[Importing](./images/importing.png)
 
 After they were in, there was still two smaller pieces of work to be done. I had to update the default variables in Postman and set `{baseUrl}` to `http://localhost:7000` manually.
 
+[Setting the baseUrl value for all requests](./images/baseurl.png)
+
 As for the requests made, I ended up jumping into the UI and watching the request information sent to the `API` when creating a team. I copied that info, found the correct request (Postman laid out the folders so nice!) and then BAM successfully managed to create a team from Postman.
 
-[Add in success photos here]
+[Updating the create team with the request body from Chrome DevTools](./images/create-team.png)
+
+[Victory!](./images/interceptor.png)
 
 > This is a great way to do some validation from outside of the Rails ecosystem while waiting on the UI to catch up.
 
