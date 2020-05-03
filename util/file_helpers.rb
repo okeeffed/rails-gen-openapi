@@ -1,6 +1,6 @@
 require "dry/monads"
 require "dry/monads/do"
-require_relative "../structs/rails_route_info.rb"
+require_relative "../structs/rails_route_info"
 module Util
   class FileHelpers
     class << self

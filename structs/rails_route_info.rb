@@ -6,5 +6,7 @@ module Structs
     attribute :verb, Types::Strict::String
     attribute :uri_pattern, Types::Strict::String
     attribute :controller_action, Types::Strict::String
+
+    attr_writer :uri_pattern
   end
 end
