@@ -19,7 +19,7 @@ module Util
 
       # Simply read the routes file and return data
       def read(file)
-        filepath = File.join(File.dirname(__dir__), file)
+        filepath = File.expand_path(file)
         file = File.read(filepath)
         Success(file)
       rescue
